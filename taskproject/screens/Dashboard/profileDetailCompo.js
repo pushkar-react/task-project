@@ -4,8 +4,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {colorItem} from '../../assets/color';
 import LinearGradient from 'react-native-linear-gradient';
+import { useSelector } from 'react-redux';
 
 const ProfileDetailCompo = () => {
+  const {profileData} = useSelector(state=>state)
   return (
     <ImageBackground
       source={require('../../assets/Images/dashboardBack.png')}
@@ -79,7 +81,7 @@ const ProfileDetailCompo = () => {
           name="person-circle-outline"
         />
         <Text style={{fontWeight: '700', fontSize: 12, color: colorItem.white}}>
-          Mr Rohit Roy
+          {profileData.FirstName}
         </Text>
         <Text
           style={{
@@ -88,7 +90,7 @@ const ProfileDetailCompo = () => {
             color: colorItem.white,
             marginTop: 10,
           }}>
-          VIR234567
+          {profileData.UserID}
         </Text>
       </View>
       <LinearGradient colors={[colorItem.subMainColor, colorItem.mainColor]} style={{height:208, opacity:0.6, width:"130%",position:"absolute", top:0}} />

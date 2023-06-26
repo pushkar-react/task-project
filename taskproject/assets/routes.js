@@ -143,7 +143,7 @@ const drawerItems = [
   },
   {
     label: 'Logout',
-    route: '',
+    route: 'logout',
     icon: (
       <Image
         source={require('../assets/Images/Logout.png')}

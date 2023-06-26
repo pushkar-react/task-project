@@ -12,11 +12,36 @@ import {TextInput, IconButton} from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import Entypo from 'react-native-vector-icons/Entypo';
 import style from './style';
+import {PostData} from '../../helpingComponents/ApiInstances';
+import {AuthContext} from '../../App';
+import Storage from '../../helpingComponents/storage';
+import {errorToast, successToast} from '../../helpingComponents/toastConfig';
 
 const Login = ({navigation}) => {
   const [text, setText] = React.useState({email: '', password: ''});
   const [secure, setsecure] = React.useState(true);
   const [focussed, setfocussed] = React.useState(false);
+  const {setToken} = React.useContext(AuthContext);
+
+  const handleLogin = async () => {
+    if (text.email && text.password) {
+      let params = {
+        email: text.email,
+        password: text.password,
+      };
+      const result = await PostData('/login', params);
+      if (result?.success) {
+        successToast(result.msg);
+        const token = await Storage.saveToken(result.token);
+        setToken(token);
+      } else {
+        errorToast("please enter correct cred")
+      }
+    } else {
+      errorToast('please fill all inputs');
+    }
+  };
+
   return (
     <KeyboardAvoidingView
       enabled={false}
@@ -25,14 +50,12 @@ const Login = ({navigation}) => {
       <ImageBackground
         source={require('../../assets/Images/Front.jpg')}
         style={{flex: 1}}>
-        <View
-          style={style.whiteScreen}>
+        <View style={style.whiteScreen}>
           <Image
             source={require('../../assets/Images/Logo.jpeg')}
             style={style.LogoImage}
           />
-          <Text
-            style={style.companyName}>
+          <Text style={style.companyName}>
             WELCOME TO Sakcham Infraventures Pvt. Ltd.
           </Text>
           <TextInput
@@ -58,7 +81,7 @@ const Login = ({navigation}) => {
             style={{flexDirection: 'row', marginTop: 40, alignItems: 'center'}}>
             <TextInput
               onFocus={() => setfocussed(true)}
-              onBlur={()=>setfocussed(false)}
+              onBlur={() => setfocussed(false)}
               secureTextEntry={secure}
               mode="flat"
               underlineStyle={{
@@ -104,17 +127,17 @@ const Login = ({navigation}) => {
             </Text>
           </View>
           <View
-          onTouchEnd={()=>navigation.navigate("MainScreen")}
+            onTouchEnd={() => handleLogin()}
             style={{
               height: 40,
               borderRadius: 10,
               margin: 40,
               justifyContent: 'center',
               alignItems: 'center',
-              backgroundColor:colorItem.mainLightColor
+              backgroundColor: colorItem.mainLightColor,
             }}
             // colors={[colorItem.mainColor, colorItem.subMainColor]}
-            >
+          >
             <Text style={{color: colorItem.subMainColor, fontWeight: '700'}}>
               LOGIN NOW
             </Text>

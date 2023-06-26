@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Dashboard from '../Dashboard';
 import {
@@ -14,25 +14,33 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import drawerItems from '../../assets/routes';
 import MyProfile from '../MyProfile';
 import {useDispatch, useSelector} from 'react-redux';
-import {AddCurrentTab} from '../../components/Redux/actions';
+import {AddProfileData} from '../../components/Redux/actions';
 import MyDirect from '../myDirect';
 import MyDownline from '../myDownline';
+import {GetData} from '../../helpingComponents/ApiInstances';
+import Storage from '../../helpingComponents/storage';
+import {AuthContext} from '../../App';
 
 const Drawer = createDrawerNavigator();
 
 const MainScreen = () => {
   const dispatch = useDispatch();
 
+  const getProfileData = async () => {
+    const res = await GetData(`/profile`);
+    dispatch(AddProfileData(res.data.data[0]));
+    console.log(res.data);
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, []);
   return (
     <Drawer.Navigator
       initialRouteName={'Dashboard'}
       backBehavior={'history'}
       defaultStatus={'closed'}
-      drawerContent={props => (
-        <DrawerContent
-          {...props}
-        />
-      )}
+      drawerContent={props => <DrawerContent {...props} />}
       screenOptions={{
         animation: 'none',
         drawerActiveBackgroundColor: colorItem.mainLightColor,
@@ -52,25 +60,27 @@ const MainScreen = () => {
 export default MainScreen;
 
 const DrawerContent = ({navigation}) => {
+  const {setToken} = React.useContext(AuthContext);
   const [open, setOpen] = React.useState('Dashboard');
+  const {profileData} = useSelector(state => state);
 
-  const handleRoute = item => {
+  const handleRoute = async item => {
     if (!!!item.subRoute) {
       if (item.route == 'open') {
         if (item.label == open) {
           setOpen('');
-          // dispatch(AddCurrentTab(''));
         } else {
           setOpen(item.label);
-          // dispatch(AddCurrentTab(item.label));
         }
+      }
+      if (item.route == 'logout') {
+        await Storage.clearToken();
+        setToken(null);
       } else {
         setOpen(item.label);
-        // dispatch(AddCurrentTab(item.label));
         navigation.navigate(item.route);
       }
     } else {
-      // dispatch(AddCurrentTab(item.subLabel));
       navigation.navigate(item.subRoute);
     }
   };
@@ -80,7 +90,7 @@ const DrawerContent = ({navigation}) => {
       <View
         style={{
           flexDirection: 'row',
-          paddingLeft: 20,
+          paddingLeft: 10,
           alignItems: 'center',
           height: 130,
           backgroundColor: colorItem.mainColor,
@@ -105,10 +115,10 @@ const DrawerContent = ({navigation}) => {
             borderColor: colorItem.mainTextColor,
           }}
         />
-        <View style={{paddingLeft: 15}}>
+        <View style={{paddingLeft: 10, width: '70%'}}>
           <Text style={{color: colorItem.mainTextColor}}>Welcome !!</Text>
           <Text style={{color: colorItem.mainTextColor, fontWeight: '700'}}>
-            Mr Rohit Roy
+            {profileData.FirstName}
           </Text>
         </View>
       </View>
@@ -128,10 +138,6 @@ const DrawerContent = ({navigation}) => {
                 borderBottomColor: '#eee',
                 marginHorizontal: 10,
                 justifyContent: 'space-between',
-                // backgroundColor:
-                //   open == items.label
-                //     ? colorItem.mainLightColor
-                //     : '#fff',
               }}>
               <View style={{flexDirection: 'row'}}>
                 <View>{items.icon}</View>
@@ -148,11 +154,7 @@ const DrawerContent = ({navigation}) => {
                 <Entypo
                   style={{fontSize: 20}}
                   color={colorItem.subMainColor}
-                  name={
-                    open == items.label
-                      ? 'chevron-up'
-                      : 'chevron-down'
-                  }
+                  name={open == items.label ? 'chevron-up' : 'chevron-down'}
                 />
               ) : (
                 ''
@@ -161,7 +163,7 @@ const DrawerContent = ({navigation}) => {
             {open == items.label
               ? items.subLabel.map(subItems => (
                   <TouchableOpacity
-                  activeOpacity={0.5}
+                    activeOpacity={0.5}
                     onPress={() => handleRoute(subItems)}
                     key={Math.random()}
                     style={{

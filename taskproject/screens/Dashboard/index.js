@@ -12,7 +12,6 @@ import { useIsFocused } from '@react-navigation/native';
 import { AddCurrentTab } from '../../components/Redux/actions';
 
 const Dashboard = ({navigation}) => {
-    const dispatch = useDispatch();
   return (
     <>
       <Header

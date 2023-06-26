@@ -1,8 +1,10 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import { colorItem } from '../../assets/color';
+import { useSelector } from 'react-redux';
 
 const DetailCard = () => {
+  const {profileData} = useSelector(state=>state)
   return (
     <View
       style={{
@@ -20,7 +22,7 @@ const DetailCard = () => {
           fontSize: 15,
           fontWeight: '700',
         }}>
-        Mr Roy Mukherji
+        {profileData.FirstName}
       </Text>
       <View
         style={{
@@ -34,7 +36,7 @@ const DetailCard = () => {
         </View>
         <View style={{width: '70%'}}>
           <Text style={{color: colorItem.mainTextColor, fontSize: 11}}>
-            VIR000034
+            {profileData.UserID}
           </Text>
         </View>
       </View>
@@ -50,7 +52,7 @@ const DetailCard = () => {
         </View>
         <View style={{width: '70%'}}>
           <Text style={{color: colorItem.mainTextColor, fontSize: 11}}>
-            12/05/1999
+            {profileData.DOB}
           </Text>
         </View>
       </View>
@@ -66,7 +68,7 @@ const DetailCard = () => {
         </View>
         <View style={{width: '70%'}}>
           <Text style={{color: colorItem.mainTextColor, fontSize: 11}}>
-            1234567890
+            {profileData.MobileNo}
           </Text>
         </View>
       </View>

@@ -5,5 +5,6 @@ export const colorItem = {
     white: "#fff",
     mainTextColor:"#222",
     subMainTextColor:"#ababab",
-    logoMainColor:""
+    logoMainColor:"",
+    green:"#40a829"
 }
