@@ -1,25 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Header from '../../components/Header';
 import TableData from './table';
+import {GetData} from '../../helpingComponents/ApiInstances';
+import LoaderCompo from '../../components/LoaderCompo';
 
 const MyDirect = ({navigation}) => {
-  const Data = [
-    {
-      ID: 'SI210416006',
-      Name: 'PRADEEP KUMAR SINGH CHAUHAN',
-      Leg: 'L',
-      Date: '4/16/2021 12:00:00 AM',
-      Amount: '4500.00',
-    },
-    {
-      ID: 'SI210416006',
-      Name: 'PRADEEP KUMAR SINGH CHAUHAN',
-      Leg: 'R',
-      Date: '4/16/2021 12:00:00 AM',
-      Amount: '4500.00',
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [loader, setLoader] = useState(true);
+
+  const getDirectData = async () => {
+    const resp = await GetData('/business/mydirect');
+    setData(resp.data.myBusinessData.myDirect);
+    setLoader(false);
+  };
+
+  useEffect(() => {
+    getDirectData();
+  }, []);
+
   return (
     <>
       <Header
@@ -33,7 +32,8 @@ const MyDirect = ({navigation}) => {
         )}
         title="My Direct"
       />
-      {Data.map(item => (
+      {loader ? <LoaderCompo /> : ''}
+      {data.map(item => (
         <TableData key={Math.random()} item={item} />
       ))}
     </>

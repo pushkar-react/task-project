@@ -1,115 +1,115 @@
 export const sponserData = [
   {
     heading: 'Sponser ID',
-    details: 'SI2020000004',
+    key:'SponserID'
   },
   {
     heading: 'Sponser Name',
-    details: 'Sakcham Infraventures Pvt. Ltd.',
+    key:'SponserName'
   },
   {
     heading: 'Joining Leg',
-    details: 'Right',
+    key:'JoiningLeg'
   },
   {
     heading: 'Joining Date',
-    details: '23/02/2020',
+    key:'JoiningDate'
   },
 ];
 
 export const userData = [
   {
     heading: 'First Name',
-    details: 'PRADEEP KUMAR SINGH CHAUHAN',
+    key:'FirstName'
   },
   {
     heading: 'Last Name',
-    details: '',
+    key:'LastName'
   },
   {
     heading: 'Gender',
-    details: 'Male',
+    key:'Gender'
   },
   {
     heading: 'Date Of Birth',
-    details: '12/12/1998',
+    key:'DOB'
   },
   {
     heading: 'Address1',
-    details: '',
+    key:'Address1'
   },
   {
     heading: 'Address2',
-    details: '',
+    key:'address2'
   },
   {
     heading: 'City',
-    details: '',
+    key:'city'
   },
   {
     heading: 'PinCode',
-    details: '',
+    key:'pin'
   },
   {
     heading: 'State',
-    details: 'UP',
+    key:'StateName'
   },
   {
     heading: 'Country',
-    details: 'India',
+    key:'country'
   },
   {
     heading: 'email',
-    details: '',
+    key:'email'
   },
   {
     heading: 'Mobile',
-    details: '1234567890',
+    key:'MobileNo'
   },
   {
     heading: 'PAN',
-    details: '',
+    key:'PAN'
   },
   {
     heading: 'Aadhar',
-    details: '',
+    key:'AdharNo'
   },
 ];
 
 export const bankData = [
   {
     heading: 'Bank Name',
-    details: '',
+    key:'BankName'
   },
   {
     heading: 'Branch Name',
-    details: '',
+    key:'branchname'
   },
   {
     heading: 'IFSC Code',
-    details: '',
+    key:'Ifsccode'
   },
   {
     heading: 'Account No',
-    details: '',
+    key:'AccountNo'
   },
   {
     heading: 'Account Type',
-    details: 'Saving',
+    key:'AccountType'
   },
 ]
 
 export const nomineeData = [ 
   {
     heading: 'Nominee Name',
-    details: '',
+    key:'NomineeName'
   },
   {
     heading: 'Nominee Relation',
-    details: '',
+    key:'NomineeRelation'
   },
   {
     heading: 'Nominee DOB',
-    details: '',
+    key:'NomineeDOB'
   },
 ]

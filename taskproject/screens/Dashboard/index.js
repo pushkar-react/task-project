@@ -29,7 +29,7 @@ const Dashboard = ({navigation}) => {
             style={{fontSize: 30}}
             color="#fff"
             name="ios-person-circle-outline"
-            onPress={() => {dispatch(AddCurrentTab('My Profile')); navigation.navigate("MyProfile")}}
+            onPress={() => {navigation.navigate("MyProfile")}}
           />
         )}
       />

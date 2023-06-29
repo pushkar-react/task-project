@@ -29,7 +29,7 @@ const Login = ({navigation}) => {
         email: text.email,
         password: text.password,
       };
-      const result = await PostData('/login', params);
+      const result = await PostData('/user/login', params);
       if (result?.success) {
         successToast(result.msg);
         const token = await Storage.saveToken(result.token);

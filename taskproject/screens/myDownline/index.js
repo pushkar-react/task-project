@@ -3,7 +3,10 @@ import Header from '../../components/Header';
 import Entypo from 'react-native-vector-icons/Entypo';
 import DataCard from './dataCard';
 import {View, Text} from 'react-native';
-import { colorItem } from '../../assets/color';
+import {colorItem} from '../../assets/color';
+import {GetData} from '../../helpingComponents/ApiInstances';
+import {useSelector} from 'react-redux';
+import LoaderCompo from '../../components/LoaderCompo';
 
 const MyDownline = ({navigation}) => {
   const Data = [
@@ -20,6 +23,22 @@ const MyDownline = ({navigation}) => {
       Received_Amount: 123456.0,
     },
   ];
+  const {profileData} = useSelector(state => state);
+
+  const [FLeveldata, setFLeveldata] = React.useState([]);
+  const [loader, setLoader] = React.useState(true);
+
+  const getDirectData = async () => {
+    const resp = await GetData('/business/mydownline');
+    console.log(resp.data.myBusinessData);
+    setFLeveldata(resp.data.myBusinessData.myTotalBusiness);
+    setLoader(false);
+  };
+
+  React.useEffect(() => {
+    getDirectData();
+  }, []);
+
   return (
     <>
       <Header
@@ -33,6 +52,7 @@ const MyDownline = ({navigation}) => {
         )}
         title="My Downline"
       />
+      {loader ? <LoaderCompo /> : ''}
       <View
         style={{
           backgroundColor: '#fff',
@@ -47,10 +67,14 @@ const MyDownline = ({navigation}) => {
             color: colorItem.mainTextColor,
             fontWeight: '700',
             width: '45%',
-          }}>Associate ID: </Text>
-        <Text style={{color: colorItem.mainTextColor, marginLeft: 10}}>123456000007</Text>
+          }}>
+          Associate ID:{' '}
+        </Text>
+        <Text style={{color: colorItem.mainTextColor, marginLeft: 10}}>
+          123456000007
+        </Text>
       </View>
-      {Data.map(item => (
+      {FLeveldata.map(item => (
         <DataCard item={item} key={Math.random()} />
       ))}
     </>

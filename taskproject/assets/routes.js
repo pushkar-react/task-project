@@ -60,7 +60,7 @@ const drawerItems = [
       },
       {
         subLabel: 'My Tree',
-        subRoute: 'open',
+        subRoute: 'TreeGraph',
         subIcon: (
           <MaterialCommunityIcons
             style={{fontSize: 15, marginTop: 2}}

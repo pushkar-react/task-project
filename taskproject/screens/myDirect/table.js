@@ -18,7 +18,7 @@ const TableData = ({item}) => {
           Associate ID:{' '}
         </Text>
         <Text style={{color: colorItem.mainTextColor, marginLeft: 10}}>
-          {item.ID}
+          {item.UserID}
         </Text>
       </View>
       <View style={{flexDirection: 'row', marginTop:10,}}>
@@ -26,7 +26,7 @@ const TableData = ({item}) => {
           Associate Name:{' '}
         </Text>
         <Text style={{color: colorItem.mainTextColor, width:"55%",marginLeft: 10}}>
-          {item.Name}
+          {item.UserName}
         </Text>
       </View>
       <View style={{flexDirection: 'row', marginTop:10,}}>
@@ -34,7 +34,7 @@ const TableData = ({item}) => {
           Joining Leg:{' '}
         </Text>
         <Text style={{color: colorItem.mainTextColor, width:"55%",marginLeft: 10}}>
-          {item.Leg}
+          {item.JoiningLeg}
         </Text>
       </View>
       <View style={{flexDirection: 'row', marginTop:10,}}>
@@ -42,7 +42,7 @@ const TableData = ({item}) => {
           Joining Date:{' '}
         </Text>
         <Text style={{color: colorItem.mainTextColor, width:"55%",marginLeft: 10}}>
-          {item.Date}
+          {item.JoiningDate}
         </Text>
       </View>
       <View style={{flexDirection: 'row', marginTop:10,}}>
@@ -50,7 +50,7 @@ const TableData = ({item}) => {
           Joining Amount:{' '}
         </Text>
         <Text style={{color: colorItem.mainTextColor, width:"55%",marginLeft: 10}}>
-          {item.Amount}
+          {item.JoiningAmount}
         </Text>
       </View>
     </View>

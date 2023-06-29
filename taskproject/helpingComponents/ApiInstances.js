@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Storage from './storage';
 // import Storage from './storage';
-export const baseUrl = 'https://sakcham.pdttech.in/api/user';
+export const baseUrl = 'https://sakcham.pdttech.in/api';
 
 export const axiosPostData = async (url, formData) => {
   return await axios
@@ -37,11 +37,13 @@ export const PostData = async (url, Data) => {
 };
 
 export const axiosGetData = async (url, formData) => {
+  let userProfile = await Storage.getToken();
   return axios
     .get(`${baseUrl}${url}`, {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
         Accept: 'application/json',
+        Authorization: `Bearer ${userProfile}`
       },
       params: formData,
     })

@@ -20,6 +20,7 @@ import MyDownline from '../myDownline';
 import {GetData} from '../../helpingComponents/ApiInstances';
 import Storage from '../../helpingComponents/storage';
 import {AuthContext} from '../../App';
+import TreeGraph from '../MyTree';
 
 const Drawer = createDrawerNavigator();
 
@@ -27,9 +28,10 @@ const MainScreen = () => {
   const dispatch = useDispatch();
 
   const getProfileData = async () => {
-    const res = await GetData(`/profile`);
+    const res = await GetData(`/user/profile`);
+    console.log(res);
     dispatch(AddProfileData(res.data.data[0]));
-    console.log(res.data);
+    
   };
 
   useEffect(() => {
@@ -43,6 +45,7 @@ const MainScreen = () => {
       drawerContent={props => <DrawerContent {...props} />}
       screenOptions={{
         animation: 'none',
+        swipeEnabled:false,
         drawerActiveBackgroundColor: colorItem.mainLightColor,
         header: () => false,
         drawerStyle: {
@@ -53,6 +56,7 @@ const MainScreen = () => {
       <Drawer.Screen name="MyProfile" component={MyProfile} />
       <Drawer.Screen name="MyDirect" component={MyDirect} />
       <Drawer.Screen name="MyDownline" component={MyDownline} />
+      <Drawer.Screen name="TreeGraph" component={TreeGraph} />
     </Drawer.Navigator>
   );
 };
@@ -72,8 +76,7 @@ const DrawerContent = ({navigation}) => {
         } else {
           setOpen(item.label);
         }
-      }
-      if (item.route == 'logout') {
+      } else if (item.route == 'logout') {
         await Storage.clearToken();
         setToken(null);
       } else {

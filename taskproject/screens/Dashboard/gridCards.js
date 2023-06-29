@@ -1,56 +1,11 @@
 import React from 'react';
-import {ScrollView, Text, View, Image} from 'react-native';
+import {Text, View, Image} from 'react-native';
 import {colorItem} from '../../assets/color';
-import {useDispatch} from 'react-redux';
-import {AddCurrentTab} from '../../components/Redux/actions';
+import {data} from './gridRoutesData';
 
 const GridCards = ({navigation}) => {
-  const dispatch = useDispatch();
-  const data = [
-    {
-      icon: require('../../assets/Images/business.png'),
-      heading: 'MY BUSINESS',
-    },
-    {
-      icon: require('../../assets/Images/my_downline.png'),
-      heading: 'MY DOWNLINE',
-      route: 'MyDownline',
-    },
-    {
-      icon: require('../../assets/Images/my-advance.png'),
-      heading: 'MY PAYOUT',
-    },
-    {
-      icon: require('../../assets/Images/dashboardprofile.png'),
-      heading: 'MY PROFILE',
-      route: 'MyProfile',
-    },
-    {
-      icon: require('../../assets/Images/business.png'),
-      heading: 'TEAM PAYOUT',
-    },
-    {
-      icon: require('../../assets/Images/plot-availibility.png'),
-      heading: 'PLOT AVAILABILITY',
-    },
-    {
-      icon: require('../../assets/Images/level-plan-tree.png'),
-      heading: 'MY TREE',
-    },
-    {
-      icon: require('../../assets/Images/level-plan-tree.png'),
-      heading: 'MY DIRECT',
-      route:'MyDirect'
-    },
-    {
-      icon: require('../../assets/Images/car.png'),
-      heading: 'REWARD',
-    },
-  ];
-
   const handleRoute = item => {
-    if (item.heading == 'MY PROFILE' || item.heading == 'MY DOWNLINE' || item.heading == 'MY DIRECT') {
-      dispatch(AddCurrentTab('My Profile'));
+    if (!!item.route) {
       navigation.navigate(item.route);
     }
   };
@@ -84,7 +39,11 @@ const GridCards = ({navigation}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Image source={item.icon} style={{height: 40, width: 40}} />
+              <Image
+                resizeMode="contain"
+                source={item.icon}
+                style={{height: 40, width: 40}}
+              />
               <Text
                 style={{
                   fontSize: 12,

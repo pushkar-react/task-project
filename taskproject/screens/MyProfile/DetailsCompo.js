@@ -1,8 +1,11 @@
 import React from 'react';
 import {ScrollView, View, Text} from 'react-native';
 import { colorItem } from '../../assets/color';
+import { useSelector } from 'react-redux';
 
-const SponserDetails = ({sponserData}) => {
+const DetailsCompo = ({sponserData}) => {
+  const {profileData} = useSelector(state=>state)
+
   return (
     <ScrollView style={{flex: 1,}} contentContainerStyle={{paddingBottom:20}}>
       {sponserData.map(data => (
@@ -11,7 +14,7 @@ const SponserDetails = ({sponserData}) => {
             <Text style={{color:colorItem.mainTextColor, fontSize:15, }}>{data.heading} :</Text>
           </View>
           <View style={{width: '60%', padding: 10}}>
-            <Text style={{color:colorItem.mainTextColor, fontSize:15, fontWeight:"700"}}>{data.details}</Text>
+            <Text style={{color:colorItem.mainTextColor, fontSize:15, fontWeight:"700"}}>{profileData[data.key]}</Text>
           </View>
         </View>
       ))}
@@ -19,4 +22,4 @@ const SponserDetails = ({sponserData}) => {
   );
 };
 
-export default SponserDetails;
+export default DetailsCompo;

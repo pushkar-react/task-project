@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {ScrollView, View, Text} from 'react-native';
 import {colorItem} from '../../assets/color';
-import SponserDetails from './sponserDetails';
+import DetailsCompo from './DetailsCompo';
 import { bankData, nomineeData, sponserData, userData } from './tabData';
 
 const tabs = [
@@ -12,7 +12,8 @@ const tabs = [
 ];
 
 const DetailsTab = () => {
-  const [currentTab, setCurrentTab] = React.useState('Sponser Details');
+  const [currentTab, setCurrentTab] = React.useState('Sponser Details')
+
   return (
     <>
       <View
@@ -62,22 +63,22 @@ const DetailsTab = () => {
           elevation: 10,
         }}>
         {currentTab == 'Sponser Details' ? (
-          <SponserDetails sponserData={sponserData} />
+          <DetailsCompo sponserData={sponserData} />
         ) : (
           ''
         )}
         {currentTab == 'User Details' ? (
-          <SponserDetails sponserData={userData} />
+          <DetailsCompo sponserData={userData} />
         ) : (
           ''
         )}
         {currentTab == 'Bank Details' ? (
-          <SponserDetails sponserData={bankData} />
+          <DetailsCompo sponserData={bankData} />
         ) : (
           ''
         )}
         {currentTab == 'Nominee Details' ? (
-          <SponserDetails sponserData={nomineeData} />
+          <DetailsCompo sponserData={nomineeData} />
         ) : (
           ''
         )}
