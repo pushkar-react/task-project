@@ -12,6 +12,8 @@ import Toast from 'react-native-toast-message';
 import {GetData} from './helpingComponents/ApiInstances';
 import {toastConfig} from './helpingComponents/toastConfig';
 import LoaderCompo from './components/LoaderCompo';
+import MyBussiness from './screens/myBussiness';
+import SplashScreen from 'react-native-splash-screen'
 
 const Stack = createNativeStackNavigator();
 const AuthContext = React.createContext();
@@ -57,6 +59,7 @@ const App = () => {
   };
 
   useEffect(() => {
+    SplashScreen.hide();
     LogBox.ignoreAllLogs();
     initializeApp();
   }, [authContext]);
@@ -72,11 +75,18 @@ const App = () => {
             ) : (
               <Stack.Navigator>
                 {state.authToken ? (
+                  <>
                   <Stack.Screen
                     options={{headerShown: false}}
                     name="MainScreen"
                     component={MainScreen}
                   />
+                  <Stack.Screen
+                    options={{headerShown: false}}
+                    name="MyBussiness"
+                    component={MyBussiness}
+                  />
+                  </>
                 ) : (
                   <Stack.Screen
                     options={{headerShown: false}}

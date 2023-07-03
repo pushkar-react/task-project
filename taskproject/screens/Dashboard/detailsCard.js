@@ -1,55 +1,45 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {ScrollView, Text, View} from 'react-native';
+import {Image, ScrollView, Text, View, Dimensions} from 'react-native';
 import {colorItem} from '../../assets/color';
+import Carousel from 'react-native-reanimated-carousel';
 
 const DetailsCard = () => {
+  const width = Dimensions.get('window').width;
+  let banner = [
+    {
+      image: require('../../assets/Images/slide-0.jpg'),
+    },
+    {
+      image: require('../../assets/Images/slide-1.jpg'),
+    },
+    {
+      image: require('../../assets/Images/slide-2.jpg'),
+    },
+    {
+      image: require('../../assets/Images/slide-4.jpg'),
+    },
+  ];
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        paddingVertical: 10,
-        elevation: 4,
-        margin: 10,
-        backgroundColor: colorItem.white,
-        borderRadius: 10,
-        paddingRight:30
-      }}>
-      <View
-        style={{
-          backgroundColor: colorItem.mainColor,
-          width: 70,
-        //   height: 70,
-          borderTopRightRadius: 50,
-          borderBottomRightRadius: 50,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Ionicons
-          style={{fontSize: 40, transform: [{rotate: '-30deg'}]}}
-          color="#fff"
-          name="megaphone"
-        />
-      </View>
-      <View style={{paddingHorizontal:20}}>
-        <Text
-          style={{
-            color: colorItem.mainTextColor,
-            fontWeight: 'bold',
-            fontSize: 13,
-          }}>
-          Payout
-        </Text>
-        <View style={{width: '90%'}}> 
-          <Text style={{color: colorItem.mainTextColor, fontSize: 13}}>
-            Embassy Office Parks is the manager to Embassy Real Estate
-            Investment Trust (REIT)
-          </Text>
-        </View>
-        <Text style={{color: colorItem.mainColor, textAlign: 'right'}}>
-          View Details
-        </Text>
-      </View>
+    <View style={{height: width / 2.5 - 40}}>
+      <Carousel
+        pagingEnabled
+        loop={true}
+        width={width}
+        autoPlay={true}
+        height={width / 2.5}
+        autoPlayInterval={3000}
+        data={banner}
+        renderItem={({item}) => {
+          return (
+            <View
+              style={[{width: width - 30, height: 120, marginHorizontal: 15,
+                marginVertical: 8,}]}>
+              
+            </View>
+          );
+        }}
+      />
     </View>
   );
 };

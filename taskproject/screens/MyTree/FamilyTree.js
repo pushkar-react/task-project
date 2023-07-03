@@ -1,14 +1,25 @@
 import React from 'react';
 import {Svg, Line, Circle} from 'react-native-svg';
-import {View, Text, StyleSheet,TouchableOpacity} from 'react-native';
-import { data } from './TreeData';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {data} from './TreeData';
+import { colorItem } from '../../assets/color';
 
-const TreeNode = ({node, handleSet}) => {
+const TreeNode = ({node, handleSet, setState}) => {
   const hasChildren = node?.children && node?.children.length > 0;
   return (
     <View style={styles.node}>
-      <TouchableOpacity onPress={handleSet}>
-        <Text style={styles.nodeName}>{node?.name}</Text>
+      <TouchableOpacity>
+        {/* <Image style={{height:40, width:40}} source={require('../../assets/Images/Male.jpg')} /> */}
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          setState();
+          handleSet(node);
+        }}
+        style={{width:150}}
+        >
+        <Text style={[styles.nodeName,{color:colorItem.mainColor}]}>{node?.UserID}</Text>
+        <Text style={styles.nodeName}>{node?.UserName}</Text>
       </TouchableOpacity>
       {hasChildren && (
         <View style={styles.childContainer}>
@@ -18,7 +29,7 @@ const TreeNode = ({node, handleSet}) => {
       {hasChildren && (
         <View style={styles.childrenContainer}>
           {node?.children.map((child, index) => (
-            <View key={child.name} style={styles.childContainer}>
+            <View key={Math.random()} style={styles.childContainer}>
               <Svg height="100" width="100%">
                 <Line
                   x1="50%"
@@ -52,7 +63,11 @@ const TreeNode = ({node, handleSet}) => {
                   ''
                 )}
               </Svg>
-              <TreeNode node={child} handleSet={handleSet} />
+              <TreeNode
+                node={child}
+                handleSet={handleSet}
+                setState={setState}
+              />
             </View>
           ))}
         </View>
@@ -79,9 +94,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   nodeName: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
-    marginBottom: 8,
+    textAlign:"center"
   },
   childrenContainer: {
     flexDirection: 'row',

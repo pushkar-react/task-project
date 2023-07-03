@@ -4,7 +4,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import DataCard from './dataCard';
 import {View, Text} from 'react-native';
 import {colorItem} from '../../assets/color';
-import {GetData} from '../../helpingComponents/ApiInstances';
+import {GetData, PostData} from '../../helpingComponents/ApiInstances';
 import {useSelector} from 'react-redux';
 import LoaderCompo from '../../components/LoaderCompo';
 
@@ -29,9 +29,9 @@ const MyDownline = ({navigation}) => {
   const [loader, setLoader] = React.useState(true);
 
   const getDirectData = async () => {
-    const resp = await GetData('/business/mydownline');
-    console.log(resp.data.myBusinessData);
-    setFLeveldata(resp.data.myBusinessData.myTotalBusiness);
+    const resp = await PostData('/business/mydownline');
+    console.log(resp.myBusinessData);
+    setFLeveldata(resp.myBusinessData.myTotalBusiness);
     setLoader(false);
   };
 
@@ -53,27 +53,6 @@ const MyDownline = ({navigation}) => {
         title="My Downline"
       />
       {loader ? <LoaderCompo /> : ''}
-      <View
-        style={{
-          backgroundColor: '#fff',
-          margin: 15,
-          padding: 20,
-          flexDirection: 'row',
-          borderRadius: 10,
-          elevation: 4,
-        }}>
-        <Text
-          style={{
-            color: colorItem.mainTextColor,
-            fontWeight: '700',
-            width: '45%',
-          }}>
-          Associate ID:{' '}
-        </Text>
-        <Text style={{color: colorItem.mainTextColor, marginLeft: 10}}>
-          123456000007
-        </Text>
-      </View>
       {FLeveldata.map(item => (
         <DataCard item={item} key={Math.random()} />
       ))}

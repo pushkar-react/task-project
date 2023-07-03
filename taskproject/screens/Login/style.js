@@ -13,6 +13,7 @@ const style = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 5,
     borderColor: colorItem.mainTextColor,
+    marginBottom:10
   },
   companyName: {
     color: colorItem.mainTextColor,

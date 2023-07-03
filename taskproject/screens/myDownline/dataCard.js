@@ -2,19 +2,21 @@ import React, {useState} from 'react';
 import {Modal, View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {colorItem} from '../../assets/color';
 import ChartDetail from './chartDetail';
-import {GetData, axiosGetData} from '../../helpingComponents/ApiInstances';
+import {GetData, PostData, axiosGetData} from '../../helpingComponents/ApiInstances';
 import LoaderCompo from '../../components/LoaderCompo';
 
 const DataCard = ({item}) => {
   const [OpenChart, setOpenChart] = useState(false);
+  const [downlineData, setdownlineData] = useState(false);
   const [loading, setloading] = useState(false);
   const handleModal = async id => {
     if (!OpenChart) {
       setloading(true);
-      const resp = await axiosGetData('/business/mydownline', {
+      const resp = await PostData('/business/mydownline', {
         JoiningLeg: item.placement,
       });
-      console.log(resp.data.myBusinessData);
+      console.log(JSON.stringify(resp.myBusinessData.mydownline));
+      setdownlineData(resp.myBusinessData.mydownline)
       setloading(false);
     }
 
@@ -41,7 +43,7 @@ const DataCard = ({item}) => {
           Joining Leg:{' '}
         </Text>
         <Text style={{color: colorItem.mainTextColor, marginLeft: 10}}>
-          {item.placement}
+          {item.placement == "L" ? "Left" : "Right"}
         </Text>
       </View>
       <View style={{flexDirection: 'row', marginTop: 10}}>
@@ -140,7 +142,7 @@ const DataCard = ({item}) => {
               }}>
               Member List
             </Text>
-            <ChartDetail />
+            <ChartDetail downlineData={downlineData} />
           </View>
         </View>
       </Modal>

@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView, View, Text} from 'react-native';
 import {colorItem} from '../../assets/color';
 
-const ChartDetail = () => {
+const ChartDetail = ({downlineData}) => {
   const headingList = [
     'SrNo',
     'Associate Id',
@@ -170,7 +170,7 @@ const ChartDetail = () => {
             ))}
           </View>
           <ScrollView contentContainerStyle={{paddingBottom: 20}}>
-            {chartData.map(el => (
+            {downlineData.map((el, index) => (
               <View
                 key={Math.random()}
                 style={{
@@ -188,7 +188,7 @@ const ChartDetail = () => {
                     borderRightColor: '#bbb',
                     width: 60,
                   }}>
-                  <Text style={{color: colorItem.white}}>{el.srNo}</Text>
+                  <Text style={{color: colorItem.white}}>{index+1}</Text>
                 </View>
                 <View
                   key={Math.random()}
@@ -201,7 +201,7 @@ const ChartDetail = () => {
                     width: 130,
                   }}>
                   <Text numberOfLines={1} style={{color: colorItem.white}}>
-                    {el.id}
+                    {el.Userid}
                   </Text>
                 </View>
                 <View
@@ -214,7 +214,7 @@ const ChartDetail = () => {
                     borderRightColor: '#fff',
                     width: 240,
                   }}>
-                  <Text style={{color: colorItem.white}}>{el.name}</Text>
+                  <Text style={{color: colorItem.white}}>{el.UserName}</Text>
                 </View>
                 <View
                   key={Math.random()}
@@ -226,7 +226,7 @@ const ChartDetail = () => {
                     borderRightColor: '#fff',
                     width: 130,
                   }}>
-                  <Text style={{color: colorItem.white}}>{el.date}</Text>
+                  <Text style={{color: colorItem.white}}>{el.joiningDate}</Text>
                 </View>
                 <View
                   key={Math.random()}
@@ -238,7 +238,7 @@ const ChartDetail = () => {
                     borderRightColor: '#fff',
                     width: 130,
                   }}>
-                  <Text style={{color: colorItem.white}}>{el.rec_Amount}</Text>
+                  <Text style={{color: colorItem.white}}>{el.JoiningAmount}</Text>
                 </View>
                 <View
                   key={Math.random()}
@@ -251,7 +251,7 @@ const ChartDetail = () => {
                     width: 130,
                   }}>
                   <Text style={{color: colorItem.white}}>
-                    {el.total_amount}
+                    {el.ReceivedAmount}
                   </Text>
                 </View>
               </View>

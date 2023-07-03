@@ -40,12 +40,12 @@ export const axiosGetData = async (url, formData) => {
   let userProfile = await Storage.getToken();
   return axios
     .get(`${baseUrl}${url}`, {
+      body : JSON.stringify(formData),
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
         Accept: 'application/json',
-        Authorization: `Bearer ${userProfile}`
+        Authorization: `Bearer ${userProfile}`,
       },
-      params: formData,
     })
     .then(res => {
       return res;
@@ -70,7 +70,7 @@ export const GetData = async url => {
       response = res;
     })
     .catch(err => {
-      console.log(err)
+      console.log(err);
     });
 
   return response;

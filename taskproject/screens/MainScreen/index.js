@@ -29,8 +29,8 @@ const MainScreen = () => {
 
   const getProfileData = async () => {
     const res = await GetData(`/user/profile`);
-    console.log(res);
-    dispatch(AddProfileData(res.data.data[0]));
+    console.log(res.data);
+    dispatch(AddProfileData(res.data.profileData[0]));
     
   };
 

@@ -42,7 +42,7 @@ const GridCards = ({navigation}) => {
               <Image
                 resizeMode="contain"
                 source={item.icon}
-                style={{height: 40, width: 40}}
+                style={[{height: 30, width: 30}, item.route == 'MyDownline' ? {height: 20, width: 20} : '']}
               />
               <Text
                 style={{

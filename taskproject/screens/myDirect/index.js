@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {ScrollView} from 'react-native'
 import Header from '../../components/Header';
 import TableData from './table';
 import {GetData} from '../../helpingComponents/ApiInstances';
@@ -33,9 +34,12 @@ const MyDirect = ({navigation}) => {
         title="My Direct"
       />
       {loader ? <LoaderCompo /> : ''}
-      {data.map(item => (
-        <TableData key={Math.random()} item={item} />
-      ))}
+
+      <ScrollView contentContainerStyle={{paddingBottom:20}}>
+        {data.map(item => (
+          <TableData key={Math.random()} item={item} />
+        ))}
+      </ScrollView>
     </>
   );
 };

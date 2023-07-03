@@ -29,13 +29,14 @@ const Login = ({navigation}) => {
         email: text.email,
         password: text.password,
       };
+      console.log('pressed',params);
       const result = await PostData('/user/login', params);
       if (result?.success) {
         successToast(result.msg);
         const token = await Storage.saveToken(result.token);
         setToken(token);
       } else {
-        errorToast("please enter correct cred")
+        errorToast('please enter correct cred');
       }
     } else {
       errorToast('please fill all inputs');
@@ -56,7 +57,7 @@ const Login = ({navigation}) => {
             style={style.LogoImage}
           />
           <Text style={style.companyName}>
-            WELCOME TO Sakcham Infraventures Pvt. Ltd.
+            Welcome to Sakcham Infraventures Pvt. Ltd.
           </Text>
           <TextInput
             mode="flat"
@@ -122,16 +123,17 @@ const Login = ({navigation}) => {
           </View>
 
           <View>
-            <Text style={{textAlign: 'right', marginTop: 10}}>
+            {/* <Text style={{textAlign: 'right', marginTop: 10}}>
               Forgot Password?
-            </Text>
+            </Text> */}
           </View>
-          <View
-            onTouchEnd={() => handleLogin()}
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => handleLogin()}
             style={{
               height: 40,
               borderRadius: 10,
-              margin: 40,
+              margin: 50,
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: colorItem.mainLightColor,
@@ -141,10 +143,7 @@ const Login = ({navigation}) => {
             <Text style={{color: colorItem.subMainColor, fontWeight: '700'}}>
               LOGIN NOW
             </Text>
-          </View>
-          <Text style={{textAlign: 'center', color: colorItem.mainTextColor}}>
-            Don't have an Account? SignUp
-          </Text>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     </KeyboardAvoidingView>
